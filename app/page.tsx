@@ -1,38 +1,50 @@
 'use client';
 
-import { usePortfolio } from '@/src/hooks/usePortfolio';
+import { useEffect, useState } from 'react';
+import Navbar from '@/src/components/Navbar';
 import Hero from '@/src/components/sections/Hero';
+import Contact from '@/src/components/sections/Contact';
 import DynamicSection from '@/src/components/DynamicSection';
+import { usePortfolio } from '@/src/hooks/usePortfolio';
 import Loading from '@/src/components/Loading';
-import { PortfolioData } from '@/src/types';
 
 export default function Home(): JSX.Element {
     const { data, loading, error } = usePortfolio();
 
     if (loading) return <Loading />;
-    if (error) return <div className="text-center py-20 text-red-500">Error: {error}</div>;
-    if (!data) return <div className="text-center py-20">No data</div>;
-
-    const typedData = data as PortfolioData;
+    if (error || !data) return <div>Error loading portfolio</div>;
 
     return (
-        <main className="bg-black">
-            <Hero profile={typedData.profile} />
+        <main className="bg-[#0A0E27] min-h-screen">
+            <Navbar profile={data.profile} />
+            <Hero profile={data.profile} />
 
-            {typedData.sections
-                ?.sort((a, b) => a.order - b.order)
-                .map((section) => {
-                    const sectionData = typedData[section.id as keyof PortfolioData];
+            {/* Dynamic Sections */}
+            {data.sections
+                ?.filter(section => section.isVisible && section.id !== 'hero')
+                .sort((a, b) => (a.order || 0) - (b.order || 0))
+                .map(section => {
+                    let items: any[] = [];
+                    if (section.id === 'projects') items = data.projects || [];
+                    else if (section.id === 'skills') items = data.skills || [];
+                    else if (section.id === 'experience') items = data.experience || [];
+                    else if (section.id === 'blog') items = data.blog || [];
+                    else if (section.id === 'testimonials') items = data.testimonials || [];
 
                     return (
-                        <DynamicSection
-                            key={section.id}
-                            section={section}
-                            items={Array.isArray(sectionData) ? sectionData : []}
-                            sectionId={section.id}
-                        />
+                        items.length > 0 && (
+                            <DynamicSection
+                                key={section.id}
+                                section={section}
+                                items={items}
+                                sectionId={section.id}
+                            />
+                        )
                     );
                 })}
+
+            {/* Contact Section */}
+            <Contact profile={data.profile} />
         </main>
     );
 }

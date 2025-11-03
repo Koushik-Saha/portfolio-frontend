@@ -7,6 +7,7 @@ import BlogCard from './cards/BlogCard';
 import SkillCard from './cards/SkillCard';
 import TestimonialCard from './cards/TestimonialCard';
 import { Section, Project, BlogPost, Skill } from '@/src/types';
+import ExperienceCard from "@/src/components/cards/ExperienceCard";
 
 interface DynamicSectionProps {
     section: Section;
@@ -21,6 +22,7 @@ const cardComponents: Record<string, CardComponentType> = {
     blog: BlogCard,
     skills: SkillCard,
     testimonials: TestimonialCard,
+    experience: ExperienceCard
 };
 
 export default function DynamicSection({ section, items, sectionId }: DynamicSectionProps): JSX.Element {
