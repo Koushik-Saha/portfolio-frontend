@@ -7,6 +7,10 @@ import Contact from '@/src/components/sections/Contact';
 import DynamicSection from '@/src/components/DynamicSection';
 import { usePortfolio } from '@/src/hooks/usePortfolio';
 import Loading from '@/src/components/Loading';
+import AIChat from "@/src/components/sections/AIChat";
+import Interactive3D from "@/src/components/sections/Interactive3D";
+import Analytics from "@/src/components/sections/Analytics";
+import Terminal from "@/src/components/sections/Terminal";
 
 export default function Home(): JSX.Element {
     const { data, loading, error } = usePortfolio();
@@ -43,8 +47,14 @@ export default function Home(): JSX.Element {
                     );
                 })}
 
+            {/* NEW EXTRAORDINARY SECTIONS */}
+            <Interactive3D />
+            <Analytics />
+            <Terminal />
+
             {/* Contact Section */}
             <Contact profile={data.profile} />
+            <AIChat />
         </main>
     );
 }
