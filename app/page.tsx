@@ -31,6 +31,13 @@ export default function Home(): JSX.Element {
 
     useKeyboardShortcuts();
 
+    useEffect(() => {
+        // Scroll to top immediately
+        window.scrollTo(0, 0);
+
+        // Also prevent any elements from auto-focusing
+        document.body.style.overflow = 'auto';
+    }, []);
 
     if (loading) return <Loading />;
     if (error || !data) return <div className="text-[#00D9FF] text-center py-20">Error loading portfolio</div>;
