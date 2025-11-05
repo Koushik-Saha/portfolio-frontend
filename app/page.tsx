@@ -8,7 +8,6 @@ import DynamicSection from '@/src/components/DynamicSection';
 import { usePortfolio } from '@/src/hooks/usePortfolio';
 import Loading from '@/src/components/Loading';
 
-// ========== 🆕 NEW COMPONENTS - Import these ==========
 import CustomCursor from '@/src/components/CustomCursor';
 import ThemeToggle from '@/src/components/ThemeToggle';
 import VisitorCounter from '@/src/components/VisitorCounter';
@@ -16,7 +15,6 @@ import FloatingActions from '@/src/components/FloatingActions';
 import Newsletter from '@/src/components/Newsletter';
 import { useKeyboardShortcuts } from '@/src/hooks/useKeyboardShortcuts';
 
-// ========== NEW SECTIONS - Import these ==========
 import GitHubProjects from '@/src/components/sections/GitHubProjects';
 import ContributionGraph from '@/src/components/sections/ContributionGraph';
 import PerformanceMetrics from '@/src/components/sections/PerformanceMetrics';
@@ -25,27 +23,27 @@ import AIChat from '@/src/components/sections/AIChat';
 import Terminal from '@/src/components/sections/Terminal';
 import Interactive3D from '@/src/components/sections/Interactive3D';
 import Analytics from '@/src/components/sections/Analytics';
-// ================================================
+
 
 export default function Home(): JSX.Element {
     const { data, loading, error } = usePortfolio();
 
-    // ========== 🆕 Initialize keyboard shortcuts ==========
+
     useKeyboardShortcuts();
-    // ================================================
+
 
     if (loading) return <Loading />;
     if (error || !data) return <div className="text-[#00D9FF] text-center py-20">Error loading portfolio</div>;
 
     return (
         <main className="bg-[#0A0E27] min-h-screen overflow-x-hidden">
-            {/* ========== 🆕 NEW FEATURES - Add these components ==========  */}
+
             <CustomCursor />
             <ThemeToggle />
             <VisitorCounter />
             <FloatingActions />
             <Newsletter />
-            {/* ======================================================== */}
+
 
             {/* Navbar */}
             <Navbar profile={data.profile} />
@@ -53,11 +51,11 @@ export default function Home(): JSX.Element {
             {/* Hero Section */}
             <Hero profile={data.profile} />
 
-            {/* ========== 🆕 NEW SECTIONS - Add these after Hero ==========  */}
+
             <Interactive3D />
             <Analytics />
             <TechStack />
-            {/* ======================================================== */}
+
 
             {/* Dynamic Sections from Database */}
             {data.sections
@@ -83,16 +81,16 @@ export default function Home(): JSX.Element {
                     );
                 })}
 
-            {/* ========== 🆕 GITHUB & CONTRIBUTION SECTIONS ==========  */}
+
             <GitHubProjects />
             {/*<ContributionGraph />*/}
             <PerformanceMetrics />
-            {/* ======================================================== */}
 
-            {/* ========== 🆕 EXTRAORDINARY SECTIONS ==========  */}
+
+
             <Terminal />
             <AIChat />
-            {/* ======================================================== */}
+
 
             {/* Contact Section */}
             <Contact profile={data.profile} />
