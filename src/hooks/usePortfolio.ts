@@ -10,7 +10,7 @@ export const usePortfolio = () => {
     useEffect(() => {
         const fetchPortfolio = async () => {
             try {
-                const response = await fetch('http://localhost:5100/api/portfolio');
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/portfolio`);
                 if (!response.ok) throw new Error('Failed to fetch portfolio data');
                 const portfolioData: PortfolioData = await response.json();
                 setData(portfolioData);

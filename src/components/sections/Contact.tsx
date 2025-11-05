@@ -28,7 +28,7 @@ export default function Contact({ profile }: ContactProps): JSX.Element {
 
         try {
             // Send email via backend
-            const response = await fetch('http://localhost:5100/api/contact', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -54,7 +54,7 @@ export default function Contact({ profile }: ContactProps): JSX.Element {
 
     const downloadResume = () => {
         const link = document.createElement('a');
-        link.href = 'http://localhost:5100/resume.pdf';
+        link.href = `${process.env.NEXT_PUBLIC_API_URL}/resume.pdf`;
         link.download = 'Koushik_Saha_Resume.pdf';
         link.click();
     };
