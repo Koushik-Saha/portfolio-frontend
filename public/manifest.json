@@ -1,0 +1,9 @@
+{
+  "name": "Koushik Saha Portfolio",
+  "short_name": "Portfolio",
+  "description": "Full Stack Engineer Portfolio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0E27",
+  "theme_color": "#00D9FF"
+}
