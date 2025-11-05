@@ -49,7 +49,7 @@ export default function Home(): JSX.Element {
             <ThemeToggle />
             <VisitorCounter />
             <FloatingActions />
-            <Newsletter />
+            {/*<Newsletter />*/}
 
 
             {/* Navbar */}
